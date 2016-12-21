@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.jft.addressbook.model.ContactData;
@@ -13,8 +14,11 @@ import pl.jft.addressbook.model.ContactData;
  */
 public class ContactHelper extends HelperBase {
 
+  private NavigationHelper navigationHelper;
+
   public ContactHelper(WebDriver wd) {
     super(wd);
+    navigationHelper = new NavigationHelper(wd);
   }
 
   public void submitContactCreation() {
@@ -59,9 +63,9 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("home page"));
   }
 
-  public void createContact(ContactData contact, boolean creation) {
-
-    fillContactForm(contact, creation);
+  public void createContact(ContactData contact) {
+    navigationHelper.goToContactPage();
+    fillContactForm(contact, true);
     submitContactCreation();
     returnToHomePage();
   }
