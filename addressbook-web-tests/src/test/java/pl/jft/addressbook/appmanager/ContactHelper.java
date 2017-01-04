@@ -3,11 +3,15 @@ package pl.jft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.jft.addressbook.model.ContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nishi on 2016-12-10.
@@ -57,6 +61,7 @@ public class ContactHelper extends HelperBase {
 
   public void submitContactDeletion() {
     wd.switchTo().alert().accept();
+    navigationHelper.goToHomePage();
   }
 
   public void returnToHomePage() {
@@ -72,5 +77,18 @@ public class ContactHelper extends HelperBase {
 
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<>();
+    List<WebElement> elements = wd.findElements(By.tagName("tr"));
+    for (int i = 1; i < elements.size(); i++) {
+      int id = Integer.parseInt(wd.findElements(By.xpath("//tr")).get(i).findElement(By.tagName("input")).getAttribute("id"));
+      String firstName = wd.findElements(By.tagName("tr")).get(i).findElement(By.xpath("td[3]")).getText();
+      String lastName = wd.findElements(By.tagName("tr")).get(i).findElement(By.xpath("td[2]")).getText();
+      ContactData contactData = new ContactData(id, firstName, lastName, null, null, null);
+      contacts.add(contactData);
+    }
+    return contacts;
   }
 }
