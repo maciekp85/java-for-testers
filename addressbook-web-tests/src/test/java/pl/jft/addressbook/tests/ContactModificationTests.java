@@ -3,7 +3,6 @@ package pl.jft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.jft.addressbook.model.ContactData;
-import pl.jft.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
@@ -15,7 +14,7 @@ public class ContactModificationTests extends TestBase {
 
   @Test(enabled = false)
   public void testContactModification() {
-    app.getNavigationHelper().goToHomePage();
+    app.goTo().goToHomePage();
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData("Maciej", "Piotrowski", "Home", "testowa street\n12-345 Cracow", "test1"));
     }

@@ -13,7 +13,7 @@ public class NavigationHelper extends HelperBase {
     super(wd);
   }
 
-  public void goToGroupPage() {
+  public void groupPage() {
     if (isElementPresent(By.cssSelector("div[id='content'] > h1"))
             && wd.findElement(By.cssSelector("div[id='content'] > h1")).getText().equals("Grupy")
             && isElementPresent(By.name("new"))) {
