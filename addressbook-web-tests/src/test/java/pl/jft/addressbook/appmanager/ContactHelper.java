@@ -1,11 +1,8 @@
 package pl.jft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.jft.addressbook.model.ContactData;

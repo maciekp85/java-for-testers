@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import pl.jft.addressbook.model.GroupData;
 import pl.jft.addressbook.model.Groups;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by nishi on 2016-12-10.

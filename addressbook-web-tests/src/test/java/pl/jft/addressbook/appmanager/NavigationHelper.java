@@ -2,7 +2,6 @@ package pl.jft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by nishi on 2016-12-10.
