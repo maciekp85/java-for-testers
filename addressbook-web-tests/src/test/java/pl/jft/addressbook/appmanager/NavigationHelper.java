@@ -21,14 +21,14 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("grupy"));
   }
 
-  public void goToHomePage() {
+  public void homePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
     click(By.linkText("strona główna"));
   }
 
-  public void goToContactPage() {
+  public void contactPage() {
     if (isElementPresent(By.cssSelector("div[id='content'] > h1"))
             && wd.findElement(By.cssSelector("div[id='content'] > h1")).getText().equals("Edytuj / dodaj wpis do książki adresowej")
             && isElementPresent(By.name("firstname"))) {
