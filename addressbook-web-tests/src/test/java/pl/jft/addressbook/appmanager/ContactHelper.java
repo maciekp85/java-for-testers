@@ -98,12 +98,15 @@ public class ContactHelper extends HelperBase {
 
   public Contacts all() {
     Contacts contacts = new Contacts();
-    List<WebElement> elements = wd.findElements(By.tagName("tr"));
-    for (int i = 1; i < elements.size(); i++) {
-      int id = Integer.parseInt(wd.findElements(By.xpath("//tr")).get(i).findElement(By.tagName("input")).getAttribute("id"));
-      String firstName = wd.findElements(By.tagName("tr")).get(i).findElement(By.xpath("td[3]")).getText();
-      String lastName = wd.findElements(By.tagName("tr")).get(i).findElement(By.xpath("td[2]")).getText();
-      ContactData contactData = new ContactData().withId(id).withFirstName(firstName).withLastName(lastName);
+    List<WebElement> rows = wd.findElements(By.name("entry"));
+    for (WebElement row: rows) {
+      List<WebElement> cells = row.findElements(By.tagName("td"));
+      int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+      String firstName = cells.get(2).getText();
+      String lastName = cells.get(1).getText();
+      String[] phones = cells.get(5).getText().split("\n");
+      ContactData contactData = new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
+              .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]);
       contacts.add(contactData);
     }
     return contacts;
