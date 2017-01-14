@@ -1,5 +1,6 @@
 package pl.jft.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
@@ -18,6 +19,7 @@ public class ContactData {
   private String email3;
   private String allEmails;
   private String contactDetails;
+  private File photo;
 
   public int getId() {
     return id;
@@ -77,6 +79,10 @@ public class ContactData {
 
   public String getContactDetails() {
     return contactDetails;
+  }
+
+  public File getPhoto() {
+    return photo;
   }
 
   public ContactData withId(int id) {
@@ -151,6 +157,11 @@ public class ContactData {
 
   public ContactData withContactDetails(String details) {
     this.contactDetails = details;
+    return this;
+  }
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
     return this;
   }
 
