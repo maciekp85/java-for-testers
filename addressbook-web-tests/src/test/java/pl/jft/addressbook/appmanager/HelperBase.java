@@ -31,7 +31,8 @@ public class HelperBase {
     }
   }
 
-  protected void attach(By locator, File photo) {
+  protected void attach(By locator, String pathToPhoto) {
+    File photo = new File(pathToPhoto);
     if (photo != null) {
         wd.findElement(locator).sendKeys(photo.getAbsolutePath());
       }

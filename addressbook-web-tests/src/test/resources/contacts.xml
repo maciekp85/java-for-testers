@@ -1,0 +1,44 @@
+<list>
+  <contacts>
+    <firstName>First0</firstName>
+    <lastName>Last0</lastName>
+    <company>Company0</company>
+    <address>Address0</address>
+    <homePhone>000-000-000</homePhone>
+    <mobilePhone>000-000-000</mobilePhone>
+    <workPhone>000-000-000</workPhone>
+    <group>Group 0</group>
+    <email>test0@email.pl</email>
+    <email2>test0@email2.pl</email2>
+    <email3>test0@email1.pl</email3>
+    <pathToPhoto>src/test/resources/test0.png</pathToPhoto>
+  </contacts>
+  <contacts>
+    <firstName>First1</firstName>
+    <lastName>Last1</lastName>
+    <company>Company1</company>
+    <address>Address1</address>
+    <homePhone>111-111-111</homePhone>
+    <mobilePhone>111-111-111</mobilePhone>
+    <workPhone>111-111-111</workPhone>
+    <group>Group 1</group>
+    <email>test1@email.pl</email>
+    <email2>test1@email2.pl</email2>
+    <email3>test1@email1.pl</email3>
+    <pathToPhoto>src/test/resources/test1.png</pathToPhoto>
+  </contacts>
+  <contacts>
+    <firstName>First2</firstName>
+    <lastName>Last2</lastName>
+    <company>Company2</company>
+    <address>Address2</address>
+    <homePhone>222-222-222</homePhone>
+    <mobilePhone>222-222-222</mobilePhone>
+    <workPhone>222-222-222</workPhone>
+    <group>Group 2</group>
+    <email>test2@email.pl</email>
+    <email2>test2@email2.pl</email2>
+    <email3>test2@email1.pl</email3>
+    <pathToPhoto>src/test/resources/test2.png</pathToPhoto>
+  </contacts>
+</list>

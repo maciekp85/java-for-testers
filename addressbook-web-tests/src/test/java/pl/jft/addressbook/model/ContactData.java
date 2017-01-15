@@ -1,25 +1,43 @@
 package pl.jft.addressbook.model;
 
-import java.io.File;
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.util.Objects;
 
+@XStreamAlias("contacts")
 public class ContactData {
+  @XStreamOmitField
   private int id = Integer.MAX_VALUE;
+  @Expose
   private String firstName;
+  @Expose
   private String lastName;
+  @Expose
   private String company;
+  @Expose
   private String address;
+  @Expose
   private String homePhone;
+  @Expose
   private String mobilePhone;
+  @Expose
   private String workPhone;
+  @Expose
   private String allPhones;
+  @Expose
   private String group;
+  @Expose
   private String email;
+  @Expose
   private String email2;
+  @Expose
   private String email3;
   private String allEmails;
   private String contactDetails;
-  private File photo;
+  @Expose
+  private String pathToPhoto;
 
   public int getId() {
     return id;
@@ -81,8 +99,8 @@ public class ContactData {
     return contactDetails;
   }
 
-  public File getPhoto() {
-    return photo;
+  public String getPathToPhoto() {
+    return pathToPhoto;
   }
 
   public ContactData withId(int id) {
@@ -160,8 +178,8 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withPhoto(File photo) {
-    this.photo = photo;
+  public ContactData withPathToPhoto(String path) {
+    this.pathToPhoto = path;
     return this;
   }
 
