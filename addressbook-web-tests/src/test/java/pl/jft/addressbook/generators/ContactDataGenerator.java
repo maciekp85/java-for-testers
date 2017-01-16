@@ -68,11 +68,12 @@ public class ContactDataGenerator {
 
   private List<ContactData> generateContacts(int count) {
     List<ContactData> contacts = new ArrayList<ContactData>();
+    int number = 9;
     for (int i = 0; i < count; i++) {
       contacts.add(new ContactData().withFirstName("First" + i).withLastName("Last" + i).withCompany("Company" + i)
-        .withAddress("Address" + i).withHomePhone(String.format("%s%s%s-%s%s%s-%s%s%s", i,i,i, i,i,i, i,i,i)).withMobilePhone(String.format("%s%s%s-%s%s%s-%s%s%s", i,i,i, i,i,i, i,i,i))
-        .withWorkPhone(String.format("%s%s%s-%s%s%s-%s%s%s", i,i,i, i,i,i, i,i,i)).withGroup("Group " + i).withEmail("test" + i + "@email.pl")
-        .withEmail2("test" + i + "@email2.pl").withEmail3("test" + i + "@email1.pl").withPathToPhoto("src/test/resources/test" + i + ".png"));
+        .withAddress("Address" + i).withHomePhone(String.format("%s%s%s-%s%s%s-%s%s%s", number,number,number, i,i,i, i,i,i)).withMobilePhone(String.format("%s%s%s-%s%s%s-%s%s%s", number,number,number, i,i,i, i,i,i))
+        .withWorkPhone(String.format("%s%s%s-%s%s%s-%s%s%s", number,number,number, i,i,i, i,i,i)).withGroup("test " + i).withEmail("test" + i + "@email.pl")
+        .withEmail2("test" + i + "@email2.pl").withEmail3("test" + i + "@email1.pl").withPathToPhoto("src/test/resources/photo" + i + ".png"));
     }
     return contacts;
   }

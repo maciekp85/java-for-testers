@@ -4,41 +4,41 @@
     "lastName": "Last0",
     "company": "Company0",
     "address": "Address0",
-    "homePhone": "000-000-000",
-    "mobilePhone": "000-000-000",
-    "workPhone": "000-000-000",
-    "group": "Group 0",
+    "homePhone": "999-000-000",
+    "mobilePhone": "999-000-000",
+    "workPhone": "999-000-000",
+    "group": "test 0",
     "email": "test0@email.pl",
     "email2": "test0@email2.pl",
     "email3": "test0@email1.pl",
-    "pathToPhoto": "src\\test\\resources\\test0.png"
+    "pathToPhoto": "src/test/resources/photo0.png"
   },
   {
     "firstName": "First1",
     "lastName": "Last1",
     "company": "Company1",
     "address": "Address1",
-    "homePhone": "111-111-111",
-    "mobilePhone": "111-111-111",
-    "workPhone": "111-111-111",
-    "group": "Group 1",
+    "homePhone": "999-111-111",
+    "mobilePhone": "999-111-111",
+    "workPhone": "999-111-111",
+    "group": "test 1",
     "email": "test1@email.pl",
     "email2": "test1@email2.pl",
     "email3": "test1@email1.pl",
-    "pathToPhoto": "src\\test\\resources\\test1.png"
+    "pathToPhoto": "src/test/resources/photo1.png"
   },
   {
     "firstName": "First2",
     "lastName": "Last2",
     "company": "Company2",
     "address": "Address2",
-    "homePhone": "222-222-222",
-    "mobilePhone": "222-222-222",
-    "workPhone": "222-222-222",
-    "group": "Group 2",
+    "homePhone": "999-222-222",
+    "mobilePhone": "999-222-222",
+    "workPhone": "999-222-222",
+    "group": "test 2",
     "email": "test2@email.pl",
     "email2": "test2@email2.pl",
     "email3": "test2@email1.pl",
-    "pathToPhoto": "src\\test\\resources\\test2.png"
+    "pathToPhoto": "src/test/resources/photo2.png"
   }
 ]
