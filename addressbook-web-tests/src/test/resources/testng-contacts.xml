@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite for contacts" verbose="1" >
+    <test name="contacts">
+        <classes>
+            <class name="pl.jft.addressbook.tests.ContactCreationTests" />
+        </classes>
+    </test>
+</suite>
