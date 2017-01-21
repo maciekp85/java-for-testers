@@ -9,7 +9,7 @@ import java.sql.*;
 /**
  * Created by nishi on 2017-01-21.
  */
-public class DbConnectionTests {
+public class DbConnectionTest {
 
   @Test
   public void testDbConnection() {
