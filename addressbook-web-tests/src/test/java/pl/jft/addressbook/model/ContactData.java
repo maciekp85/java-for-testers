@@ -3,40 +3,85 @@ package pl.jft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @XStreamAlias("contacts")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
+
   @XStreamOmitField
+  @Id
+  @Column(name = "id")
   private int id = Integer.MAX_VALUE;
+
   @Expose
+  @Column(name = "firstname")
   private String firstName;
+
   @Expose
+  @Column(name = "lastname")
   private String lastName;
+
   @Expose
+  @Column(name = "company")
   private String company;
+
   @Expose
+  @Column(name = "address")
+  @Type( type = "text")
   private String address;
+
   @Expose
+  @Column(name = "home")
+  @Type( type = "text")
   private String homePhone;
+
   @Expose
+  @Column(name = "mobile")
+  @Type( type = "text")
   private String mobilePhone;
+
   @Expose
+  @Column(name = "work")
+  @Type( type = "text")
   private String workPhone;
+
   @Expose
+  @Transient
   private String allPhones;
+
   @Expose
+  @Transient
   private String group;
+
   @Expose
+  @Column(name = "email")
+  @Type( type = "text")
   private String email;
+
   @Expose
+  @Column(name = "email2")
+  @Type( type = "text")
   private String email2;
+
   @Expose
+  @Column(name = "email3")
+  @Type( type = "text")
   private String email3;
+
+  @Transient
   private String allEmails;
+
+  @Transient
   private String contactDetails;
+
   @Expose
+  @Column(name = "photo")
+  @Type( type = "text")
   private String pathToPhoto;
 
   public int getId() {
