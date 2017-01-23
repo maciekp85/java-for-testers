@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,11 +42,19 @@ public class ContactCreationTests extends TestBase {
     @Test(dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contact) {
         app.goTo().homePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         app.goTo().contactPage();
         app.contact().create(contact);
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertEquals(after.size(), before.size() + 1);
+
+        List<Integer> ids = new ArrayList<>();
+        for (ContactData c: after) {
+            ids.add(c.getId());
+        }
+        Comparator<? super Integer> byId = Comparator.comparingInt( Integer::intValue );
+        ids.sort(byId);
+        contact.withId(ids.get(after.size() - 1));
         assertThat(after, equalTo(before.withAdded(contact)));
     }
 
