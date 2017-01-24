@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.jft.addressbook.model.ContactData;
 import pl.jft.addressbook.model.Contacts;
+import pl.jft.addressbook.model.GroupData;
+import pl.jft.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -41,8 +43,11 @@ public class ContactHelper extends HelperBase {
     attach(By.name("photo"), contactData.getPathToPhoto());
 
     if (creation) {
-      if (wd.findElement(By.name("new_group")).getText().contains("test1"))
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      }
+
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -138,23 +143,24 @@ public class ContactHelper extends HelperBase {
     return new ContactData()
             .withId(contact.getId()).withFirstName(firstName).withLastName(lastName).withCompany(company).withAddress(address)
             .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
-            .withEmail(email).withEmail2(email2).withEmail3(email3).withGroup(contact.getGroup());
+            .withEmail(email).withEmail2(email2).withEmail3(email3).inGroup(contact.getGroups().iterator().next());
   }
 
   public ContactData infoFromDetailsForm(ContactData contact) {
     initContactDetailsById(contact.getId());
     String contactDetails = wd.findElement(By.id("content")).getText();
-    String group = "";
+    String groupName = "";
     String [] elements = contactDetails.split("\n");
     for (int i = 0; i < elements.length; i++) {
       if (elements[i].contains("Członek grupy:")) {
-        group = elements[i].substring(14);
+        groupName = elements[i].substring(14);
       }
 
     }
     wd.navigate().back();
-    contact.withGroup(group);
-    return new ContactData().withId(contact.getId()).withGroup(group).withContactDetails(contactDetails);
+    GroupData group = contact.getGroups().iterator().next().withName(groupName);
+    contact.inGroup(group);
+    return new ContactData().withId(contact.getId()).inGroup(group).withContactDetails(contactDetails);
   }
 
   private void initContactDetailsById(int id) {

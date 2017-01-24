@@ -27,7 +27,7 @@ public class ContactDetailsTests extends TestBase {
   public String mergeAll(ContactData contact) {
     return Arrays.asList(contact.getFirstName(), contact.getLastName(), contact.getCompany(), contact.getAddress(),
             contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(),
-            contact.getEmail(), contact.getEmail2(), contact.getEmail3(), contact.getGroup())
+            contact.getEmail(), contact.getEmail2(), contact.getEmail3(), contact.getGroups().iterator().next().getName())
             .stream().filter((s) -> ! s.equals(""))
             .map(ContactDetailsTests::cleaned)
             .collect(Collectors.joining(""));

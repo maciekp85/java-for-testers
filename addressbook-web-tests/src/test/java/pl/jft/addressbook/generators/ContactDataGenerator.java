@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import pl.jft.addressbook.model.ContactData;
+import pl.jft.addressbook.model.GroupData;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class ContactDataGenerator {
     for (int i = 0; i < count; i++) {
       contacts.add(new ContactData().withFirstName("First" + i).withLastName("Last" + i).withCompany("Company" + i)
         .withAddress("Address" + i).withHomePhone(String.format("%s%s%s-%s%s%s-%s%s%s", number,number,number, i,i,i, i,i,i)).withMobilePhone(String.format("%s%s%s-%s%s%s-%s%s%s", number,number,number, i,i,i, i,i,i))
-        .withWorkPhone(String.format("%s%s%s-%s%s%s-%s%s%s", number,number,number, i,i,i, i,i,i)).withGroup("test " + i).withEmail("test" + i + "@email.pl")
+        .withWorkPhone(String.format("%s%s%s-%s%s%s-%s%s%s", number,number,number, i,i,i, i,i,i)).inGroup(new GroupData().withName("test " + i)).withEmail("test" + i + "@email.pl")
         .withEmail2("test" + i + "@email2.pl").withEmail3("test" + i + "@email1.pl").withPathToPhoto("src/test/resources/photo" + i + ".png"));
     }
     return contacts;
