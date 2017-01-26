@@ -101,6 +101,20 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
+  public void addToGroup(ContactData contact, Groups groups) {
+    WebElement selectlist;
+    for (GroupData g : groups) {
+      selectContactById( contact.getId() );
+      selectlist = wd.findElements( By.tagName( "select" ) ).get( 1 );
+      if (!g.getContacts().contains( contact )) {
+        new Select( wd.findElements( By.tagName( "select" ) ).get( 1 ) ).selectByVisibleText( g.getName() );
+        selectlist.findElement(By.xpath( "./.." )).click();
+        contact.inGroup(g);
+      }
+      navigationHelper.homePage();
+    }
+  }
+
   private void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
@@ -169,4 +183,5 @@ public class ContactHelper extends HelperBase {
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(6).findElement(By.tagName("a")).click();
   }
+
 }
