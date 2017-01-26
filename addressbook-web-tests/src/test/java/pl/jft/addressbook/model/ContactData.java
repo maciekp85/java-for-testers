@@ -56,6 +56,7 @@ public class ContactData {
   @Transient
   private String allPhones;
 
+  @Expose
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "address_in_groups",
           joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))

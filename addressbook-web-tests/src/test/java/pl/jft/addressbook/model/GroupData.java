@@ -33,7 +33,7 @@ public class GroupData {
   @Type(type = "text")
   private String footer;
 
-  @ManyToMany(mappedBy = "groups")
+  @ManyToMany(fetch = FetchType.EAGER, mappedBy = "groups")
   private Set<ContactData> contacts = new HashSet<ContactData>();
 
   public int getId() {
@@ -82,23 +82,20 @@ public class GroupData {
     if (o == null || getClass() != o.getClass()) return false;
     GroupData groupData = (GroupData) o;
     return id == groupData.id &&
-            Objects.equals( name, groupData.name ) &&
-            Objects.equals( header, groupData.header ) &&
-            Objects.equals( footer, groupData.footer );
+            Objects.equals( name, groupData.name );
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash( id, name, header, footer );
+    return Objects.hash( id, name );
   }
 
   @Override
   public String toString() {
     return "GroupData{" +
-            "id='" + id + '\'' +
+            "id=" + id +
             ", name='" + name + '\'' +
             '}';
-
   }
 
 }

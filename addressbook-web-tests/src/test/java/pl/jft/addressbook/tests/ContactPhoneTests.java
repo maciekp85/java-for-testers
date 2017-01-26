@@ -2,6 +2,7 @@ package pl.jft.addressbook.tests;
 
 import org.testng.annotations.Test;
 import pl.jft.addressbook.model.ContactData;
+import pl.jft.addressbook.model.Contacts;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -17,10 +18,10 @@ public class ContactPhoneTests extends TestBase {
   @Test
   public void testContactPhones() {
     app.goTo().homePage();
-    ContactData contact = app.contact().all().iterator().next();
-    ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+    Contacts contact = app.db().contacts();
+    ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact.iterator().next());
 
-    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(mergePhones(contact.iterator().next()), equalTo(mergePhones(contactInfoFromEditForm)));
   }
 
   private String mergePhones(ContactData contact) {

@@ -21,7 +21,9 @@ public class ContactDeletionTests extends TestBase {
       Groups groups = app.db().groups();
       app.goTo().homePage();
       app.contact().create(new ContactData()
-              .withFirstName("Wojtek").withLastName("Barski").withCompany("Sea").withAddress("barska street\n33-444 Warsaw").inGroup(groups.iterator().next().withName("test1")));
+              .withFirstName("Wojtek").withLastName("Barski").withCompany("Sea").withAddress("barska street\n33-444 Warsaw").inGroup(groups.iterator().next())
+              .withEmail("test@email.pl").withEmail2("test2@email.pl").withEmail3("test3@email.pl")
+              .withHomePhone("111222333").withMobilePhone("444555666").withWorkPhone("777888999"));
     }
   }
 

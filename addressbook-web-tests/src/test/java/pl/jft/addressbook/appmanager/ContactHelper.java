@@ -158,7 +158,7 @@ public class ContactHelper extends HelperBase {
 
     }
     wd.navigate().back();
-    GroupData group = contact.getGroups().iterator().next().withName(groupName);
+    GroupData group = new GroupData().withName(groupName);
     contact.inGroup(group);
     return new ContactData().withId(contact.getId()).inGroup(group).withContactDetails(contactDetails);
   }

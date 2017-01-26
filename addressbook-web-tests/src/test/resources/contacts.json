@@ -7,7 +7,11 @@
     "homePhone": "999-000-000",
     "mobilePhone": "999-000-000",
     "workPhone": "999-000-000",
-    "group": "test 0",
+    "groups": [
+      {
+        "name": "test 0"
+      }
+    ],
     "email": "test0@email.pl",
     "email2": "test0@email2.pl",
     "email3": "test0@email1.pl",
@@ -21,7 +25,11 @@
     "homePhone": "999-111-111",
     "mobilePhone": "999-111-111",
     "workPhone": "999-111-111",
-    "group": "test 1",
+    "groups": [
+      {
+        "name": "test 1"
+      }
+    ],
     "email": "test1@email.pl",
     "email2": "test1@email2.pl",
     "email3": "test1@email1.pl",
@@ -35,7 +43,11 @@
     "homePhone": "999-222-222",
     "mobilePhone": "999-222-222",
     "workPhone": "999-222-222",
-    "group": "test 2",
+    "groups": [
+      {
+        "name": "test 2"
+      }
+    ],
     "email": "test2@email.pl",
     "email2": "test2@email2.pl",
     "email3": "test2@email1.pl",

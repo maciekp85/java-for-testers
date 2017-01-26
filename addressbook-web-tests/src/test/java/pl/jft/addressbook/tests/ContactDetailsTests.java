@@ -1,7 +1,10 @@
 package pl.jft.addressbook.tests;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.jft.addressbook.model.ContactData;
+import pl.jft.addressbook.model.Contacts;
+import pl.jft.addressbook.model.Groups;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -14,12 +17,24 @@ import static org.hamcrest.Matchers.equalTo;
  */
 public class ContactDetailsTests extends TestBase {
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    if (app.db().contacts().size() == 0) {
+      Groups groups = app.db().groups();
+      app.goTo().homePage();
+      app.contact().create(new ContactData()
+              .withFirstName("Wojtek").withLastName("Barski").withCompany("Sea").withAddress("barska street\n33-444 Warsaw").inGroup(groups.iterator().next())
+              .withEmail("test@email.pl").withEmail2("test2@email.pl").withEmail3("test3@email.pl")
+              .withHomePhone("111222333").withMobilePhone("444555666").withWorkPhone("777888999"));
+    }
+  }
+
   @Test
   public void testContactDetails() {
     app.goTo().homePage();
-    ContactData contact = app.contact().all().iterator().next();
-    ContactData contactInfoFromDetailsForm = app.contact().infoFromDetailsForm(contact);
-    ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+    Contacts contact = app.db().contacts();
+    ContactData contactInfoFromDetailsForm = app.contact().infoFromDetailsForm(contact.iterator().next());
+    ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact.iterator().next());
 
     assertThat(cleaned(contactInfoFromDetailsForm.getContactDetails()), equalTo(mergeAll(contactInfoFromEditForm)));
   }

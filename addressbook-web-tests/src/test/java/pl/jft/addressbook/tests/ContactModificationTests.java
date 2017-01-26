@@ -21,7 +21,9 @@ public class ContactModificationTests extends TestBase {
       Groups groups = app.db().groups();
       app.goTo().homePage();
       app.contact().create(new ContactData()
-              .withFirstName("Wojtek").withLastName("Barski").withCompany("Sea").withAddress("barska street\n33-444 Warsaw").inGroup(groups.iterator().next().withName("test1")));
+              .withFirstName("Wojtek").withLastName("Barski").withCompany("Sea").withAddress("barska street\n33-444 Warsaw").inGroup(groups.iterator().next())
+              .withEmail("test@email.pl").withEmail2("test2@email.pl").withEmail3("test3@email.pl")
+              .withHomePhone("111222333").withMobilePhone("444555666").withWorkPhone("777888999"));
     }
   }
 
@@ -30,7 +32,10 @@ public class ContactModificationTests extends TestBase {
     Contacts before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
     ContactData contacts = new ContactData()
-            .withId(modifiedContact.getId()).withFirstName("Jan").withLastName("Kowalski").withCompany("Home").withAddress("kowalska street\r\n12-345 Cracow");
+            .withId(modifiedContact.getId()).withFirstName("Jan").withLastName("Kowalski").withCompany("Home").withAddress("kowalska street\r\n12-345 Cracow")
+            .inGroup(modifiedContact.getGroups().iterator().next())
+            .withEmail("test@email.pl").withEmail2("test2@email.pl").withEmail3("test3@email.pl")
+            .withHomePhone("111222333").withMobilePhone("444555666").withWorkPhone("777888999");
     app.goTo().homePage();
     app.contact().modify(contacts);
     Contacts after = app.db().contacts();
