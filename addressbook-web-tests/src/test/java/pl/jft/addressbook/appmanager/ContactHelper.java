@@ -101,18 +101,21 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-  public void addToGroup(ContactData contact, Groups groups) {
-    WebElement selectlist;
+  public boolean addToGroup(ContactData contact, Groups groups) {
+    WebElement addToButton;
     for (GroupData g : groups) {
       selectContactById( contact.getId() );
-      selectlist = wd.findElements( By.tagName( "select" ) ).get( 1 );
+      addToButton = wd.findElement( By.xpath("//input[@value='Dodaj do']"));
       if (!g.getContacts().contains( contact )) {
-        new Select( wd.findElements( By.tagName( "select" ) ).get( 1 ) ).selectByVisibleText( g.getName() );
-        selectlist.findElement(By.xpath( "./.." )).click();
+        new Select( wd.findElements( By.tagName( "select" ) ).get( 1 ) ).selectByValue(String.valueOf(g.getId()));
+        addToButton.click();
         contact.inGroup(g);
+        return true;
       }
       navigationHelper.homePage();
     }
+
+    return false;
   }
 
   private void selectContactById(int id) {

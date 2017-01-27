@@ -1,19 +1,16 @@
 package pl.jft.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.jft.addressbook.model.ContactData;
-import pl.jft.addressbook.model.Contacts;
 import pl.jft.addressbook.model.GroupData;
 import pl.jft.addressbook.model.Groups;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 /**
  * Created by nishi on 2017-01-26.
  */
-public class AddContactToGroupsTest extends TestBase {
+public class AddContactToGroupTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -23,6 +20,7 @@ public class AddContactToGroupsTest extends TestBase {
         app.goTo().groupPage();
         app.group().create(new GroupData().withName("test 1")
                 .withHeader("header").withFooter("footer"));
+        groups = app.db().groups();
       }
       if(app.db().contacts().size() == 0) {
         app.goTo().homePage();
@@ -35,14 +33,22 @@ public class AddContactToGroupsTest extends TestBase {
   }
 
   @Test
-  public void testAddContactToGroups() {
+  public void testAddContactToGroup() {
     app.goTo().homePage();
-    Contacts before = app.db().contacts();
     Groups groups = app.db().groups();
-    ContactData checkedContact = before.iterator().next();
-    app.contact().addToGroup(checkedContact, groups);
+    ContactData checkedContact = app.db().contacts().iterator().next();
+    Groups groupsBefore = checkedContact.getGroups();
+    boolean isContactAddedToGroup = app.contact().addToGroup( checkedContact, groups );
+    while (!isContactAddedToGroup) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("new Group")
+              .withHeader("header").withFooter("footer"));
+      groups = app.db().groups();
+      app.goTo().homePage();
+      isContactAddedToGroup = app.contact().addToGroup(checkedContact, groups);
+    }
 
-    Contacts after = app.db().contacts();
-    assertThat(after, equalTo(before.without(checkedContact).withAdded(checkedContact)));
+    Groups groupsAfter = checkedContact.getGroups();
+    Assert.assertEquals(groupsAfter.size(), groupsBefore.size() + 1);
   }
 }
