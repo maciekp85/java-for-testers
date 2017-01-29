@@ -101,22 +101,50 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-  public boolean addToGroup(ContactData contact, Groups groups) {
-    WebElement addToButton;
+  public boolean addToGroup(ContactData contact, GroupData group, Groups groups) {
+    selectContactById( contact.getId() );
+    if (checkIfYouCanAddContactToGroup(contact, group))
+      return true;
+
     for (GroupData g : groups) {
-      selectContactById( contact.getId() );
-      addToButton = wd.findElement( By.xpath("//input[@value='Dodaj do']"));
-      if (!g.getContacts().contains( contact )) {
-        new Select( wd.findElements( By.tagName( "select" ) ).get( 1 ) ).selectByValue(String.valueOf(g.getId()));
-        addToButton.click();
-        contact.inGroup(g);
+      if (checkIfYouCanAddContactToGroup( contact, g ))
         return true;
-      }
       navigationHelper.homePage();
     }
-
     return false;
   }
+
+  public boolean deleteFromGroup(ContactData contact, GroupData group, Groups groups) {
+    if (checkIfYouCanDeleteGroupFromContact(contact, group))
+      return true;
+
+    for (GroupData g : groups) {
+      if (checkIfYouCanDeleteGroupFromContact(contact, g))
+        return true;
+    }
+    return false;
+  }
+
+    private boolean checkIfYouCanAddContactToGroup(ContactData contact, GroupData group) {
+      WebElement addToButton = wd.findElement( By.xpath("//input[@value='Dodaj do']"));
+      if (!group.getContacts().contains(contact)) {
+        new Select( wd.findElements( By.tagName( "select" ) ).get( 1 ) ).selectByValue(String.valueOf(group.getId()));
+        addToButton.click();
+        contact.inGroup(group);
+        return true;
+      }
+      return false;
+    }
+
+    private boolean checkIfYouCanDeleteGroupFromContact(ContactData contact, GroupData group) {
+      if (contact.getGroups().contains( group )) {
+        new Select(wd.findElements(By.tagName("select")).get(0)).selectByValue(String.valueOf(group.getId()));
+        selectContactById(contact.getId());
+        wd.findElement( By.xpath("//input[@value='Usuń z \"" + group.getName() + "\"']")).click();
+        return true;
+      }
+      return false;
+    }
 
   private void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();

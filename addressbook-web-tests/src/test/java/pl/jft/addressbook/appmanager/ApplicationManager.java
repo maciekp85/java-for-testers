@@ -27,6 +27,7 @@ public class ApplicationManager {
   private ContactHelper contactHelper;
   private String browser;
   private DbHelper dbHelper;
+  private PreconditionsHelper preconditionsHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -49,6 +50,7 @@ public class ApplicationManager {
 
     wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));
+    preconditionsHelper = new PreconditionsHelper(wd);
     groupHelper = new GroupHelper(wd);
     contactHelper = new ContactHelper(wd);
     navigationHelper = new NavigationHelper(wd);
@@ -74,6 +76,10 @@ public class ApplicationManager {
 
   public DbHelper db() {
     return dbHelper;
+  }
+
+  public PreconditionsHelper pre() {
+    return preconditionsHelper;
   }
 
 }

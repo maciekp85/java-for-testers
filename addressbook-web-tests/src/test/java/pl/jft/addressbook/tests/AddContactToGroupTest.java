@@ -14,38 +14,24 @@ public class AddContactToGroupTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if(app.db().contacts().size() == 0 || app.db().groups().size() == 0) {
-      Groups groups = app.db().groups();
-      if(groups.size() == 0) {
-        app.goTo().groupPage();
-        app.group().create(new GroupData().withName("test 1")
-                .withHeader("header").withFooter("footer"));
-        groups = app.db().groups();
-      }
-      if(app.db().contacts().size() == 0) {
-        app.goTo().homePage();
-        app.contact().create(new ContactData()
-                .withFirstName("Wojtek").withLastName("Barski").withCompany("Sea").withAddress("barska street\n33-444 Warsaw").inGroup(groups.iterator().next())
-                .withEmail("test@email.pl").withEmail2("test2@email.pl").withEmail3("test3@email.pl")
-                .withHomePhone("111222333").withMobilePhone("444555666").withWorkPhone("777888999"));
-      }
-    }
+    app.pre().addGroupOrContactIfNotExist(app);
   }
 
   @Test
   public void testAddContactToGroup() {
     app.goTo().homePage();
     Groups groups = app.db().groups();
+    GroupData groupToAdd = groups.iterator().next();
     ContactData checkedContact = app.db().contacts().iterator().next();
     Groups groupsBefore = checkedContact.getGroups();
-    boolean isContactAddedToGroup = app.contact().addToGroup( checkedContact, groups );
+    boolean isContactAddedToGroup = app.contact().addToGroup( checkedContact, groupToAdd, groups );
     while (!isContactAddedToGroup) {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("new Group")
               .withHeader("header").withFooter("footer"));
       groups = app.db().groups();
       app.goTo().homePage();
-      isContactAddedToGroup = app.contact().addToGroup(checkedContact, groups);
+      isContactAddedToGroup = app.contact().addToGroup(checkedContact, groupToAdd, groups);
     }
 
     Groups groupsAfter = checkedContact.getGroups();

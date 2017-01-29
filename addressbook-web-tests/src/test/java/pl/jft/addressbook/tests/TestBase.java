@@ -1,7 +1,5 @@
 package pl.jft.addressbook.tests;
 
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
