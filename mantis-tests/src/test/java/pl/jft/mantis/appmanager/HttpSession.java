@@ -10,6 +10,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.openqa.selenium.By;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,13 +19,12 @@ import java.util.List;
 /**
  * Created by nishi on 2017-01-29.
  */
-public class HttpSession {
+public class HttpSession extends HelperBase {
 
-  private final ApplicationManager app;
   private final CloseableHttpClient httpClient;
 
   public HttpSession(ApplicationManager app) {
-    this.app = app;
+    super(app);
     httpClient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
   }
 
@@ -41,6 +41,12 @@ public class HttpSession {
     return body.contains( String.format("<span class=\"user-info\">%s</span>", username));
   }
 
+  public void loginUI(String username, String password) {
+    type( By.name("username"), username);
+    type( By.name( "password"), password );
+    click(By.cssSelector("input[value='Zaloguj się']"));
+  }
+
   private String getTextFrom(CloseableHttpResponse response) throws IOException {
     try {
       return EntityUtils.toString(response.getEntity());
@@ -55,5 +61,4 @@ public class HttpSession {
     String body = getTextFrom(response);
     return body.contains( String.format("<span class=\"user-info\">%s</span>", username));
   }
-
 }
