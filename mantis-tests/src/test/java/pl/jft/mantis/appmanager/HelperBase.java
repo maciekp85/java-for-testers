@@ -33,25 +33,6 @@ public class HelperBase {
     }
   }
 
-  protected void attach(By locator, String pathToPhoto) {
-    if (pathToPhoto.equals("")) {
-      return;
-    }
-    File photo = new File(pathToPhoto);
-    if (photo != null) {
-        wd.findElement(locator).sendKeys(photo.getAbsolutePath());
-      }
-  }
-
-  public boolean isAlertPresent() {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-
   protected boolean isElementPresent(By locator) {
     try {
       wd.findElement(locator);

@@ -8,11 +8,9 @@ import pl.jft.mantis.model.UserData;
  */
 public class UserHelper extends HelperBase {
 
-
   public UserHelper(ApplicationManager app) {
     super( app );
   }
-
 
   public void changePasswordFor(UserData user) {
     selectUserById(user.getId());

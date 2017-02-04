@@ -14,14 +14,6 @@ public class Users extends ForwardingSet<UserData> {
 
   private Set<UserData> delegate;
 
-  public Users(Users users) {
-    this.delegate = new HashSet<UserData>( users.delegate );
-  }
-
-  public Users() {
-    this.delegate = new HashSet<UserData>();
-  }
-
   public Users(Collection<UserData> users) {
     this.delegate = new HashSet<UserData>(users);
   }

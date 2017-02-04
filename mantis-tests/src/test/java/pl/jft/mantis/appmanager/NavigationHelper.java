@@ -12,31 +12,6 @@ public class NavigationHelper extends HelperBase {
     super(app);
   }
 
-  public void groupPage() {
-    if (isElementPresent(By.cssSelector("div[id='content'] > h1"))
-            && wd.findElement(By.cssSelector("div[id='content'] > h1")).getText().equals("Grupy")
-            && isElementPresent(By.name("new"))) {
-      return;
-    }
-    click(By.linkText("grupy"));
-  }
-
-  public void homePage() {
-    if (isElementPresent(By.id("maintable"))) {
-      return;
-    }
-    click(By.linkText("strona główna"));
-  }
-
-  public void contactPage() {
-    if (isElementPresent(By.cssSelector("div[id='content'] > h1"))
-            && wd.findElement(By.cssSelector("div[id='content'] > h1")).getText().equals("Edytuj / dodaj wpis do książki adresowej")
-            && isElementPresent(By.name("firstname"))) {
-      return;
-    }
-    click(By.linkText("nowy wpis"));
-  }
-
   public void managePage() {
     if (isElementPresent(By.cssSelector("a[href='manage_overview_page.php]"))) {
       return;
