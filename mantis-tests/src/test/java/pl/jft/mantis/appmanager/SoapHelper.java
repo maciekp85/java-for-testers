@@ -32,9 +32,30 @@ public class SoapHelper {
             .collect( Collectors.toSet() );
   }
 
-  private MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
+  public MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
     return new MantisConnectLocator()
             .getMantisConnectPort(new URL("http://localhost/mantisbt-2.0.0/api/soap/mantisconnect.php"));
+  }
+
+  public Set<Issue> getIssuesReportedBy(String username, String password) throws RemoteException, ServiceException, MalformedURLException {
+    MantisConnectPortType mc = getMantisConnect();
+    Set<Project> projects = getProjects();
+    int accessLevel = 25;
+    if (username.equals("administrator")) {
+      accessLevel = 90;
+    }
+    AccountData[] users = mc.mc_project_get_users( username, password, BigInteger.valueOf(projects.iterator().next().getId()), BigInteger.valueOf(accessLevel));
+    int j = 0;
+    AccountData user = users[j];
+    while (!user.getName().equals( username)) {
+      user = users[++j];
+    }
+    AccountData finalUser = user;
+    IssueData[] issueDatas = mc.mc_project_get_issues_for_user( username, password, BigInteger.valueOf(projects.iterator().next().getId()), "reported", finalUser, BigInteger.valueOf( 1 ), BigInteger.valueOf( -1 ) );
+    return Arrays.asList( issueDatas ).stream()
+            .map( (i) -> new Issue().withId( i.getId().intValue()).withSummary( i.getSummary() )
+                    .withDescription(i.getDescription()).withProject( new Project().withId( finalUser.getId().intValue()).withName( finalUser.getName())))
+            .collect( Collectors.toSet());
   }
 
   public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {

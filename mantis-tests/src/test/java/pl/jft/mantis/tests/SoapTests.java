@@ -1,6 +1,7 @@
 package pl.jft.mantis.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.jft.mantis.model.Issue;
 import pl.jft.mantis.model.Project;
@@ -14,6 +15,15 @@ import java.util.Set;
  * Created by nishi on 2017-02-04.
  */
 public class SoapTests extends TestBase {
+
+  @BeforeMethod
+  public void ensurePreconditions() throws RemoteException, ServiceException, MalformedURLException {
+//    Set<Issue> issues = app.soap().getIssues( "administrator", "root" );
+    Set<Issue> issues = app.soap().getIssuesReportedBy( "maciek1234", "Maciek123" );
+    for (Issue issue: issues) {
+      skipIfNotFixed(issue.getId());
+    }
+  }
 
   @Test
   public void testGetProjects() throws MalformedURLException, ServiceException, RemoteException {
